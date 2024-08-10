@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UserContext from "../users/userContext";
-import loginImg from "../users/img/login-img.jpg";
+// import UserContext from "../users/userContext";
+import loginImg from "./MechImage.jpg";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -10,7 +10,6 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import AdminLoginPage from "./adminLogin";
-import DeliveryLoginPage from "../delivery/delliveryLoginPage";
 import Swal from "sweetalert2";
 
 const schema = z.object({
@@ -73,7 +72,7 @@ function FPPage() {
             timer: 1500,
           });
 
-          navigate("/delivery/login");
+          navigate("/login");
           // Reset the error state
           setLoginError("");
         } else {
@@ -85,7 +84,7 @@ function FPPage() {
             timer: 1500,
           });
 
-          navigate("/admin/login");
+          navigate("/login");
           // Reset the error state
           setLoginError("");
         }
@@ -113,7 +112,7 @@ function FPPage() {
   }
   return (
     <>
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? ( */}
         <div className="login-clip">
           <div className="login-flex-box">
             <div className="login-img-box">
@@ -167,11 +166,9 @@ function FPPage() {
             </form>
           </div>
         </div>
-      ) : decoded == "delivery" ? (
-        <DeliveryLoginPage />
-      ) : (
+      {/* ) : (
         <AdminLoginPage />
-      )}
+      )} */}
     </>
   );
 }

@@ -44,7 +44,7 @@ function AdminHeader() {
           )}
           {!Dname && (
             <>
-              <Link className="nav-btn1" to="/admin/login">
+              <Link className="nav-btn1" to="/login">
                 Log-In
               </Link>
             </>

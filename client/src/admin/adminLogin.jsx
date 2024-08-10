@@ -14,7 +14,7 @@ const schema = z.object({
   username: z.string(),
   password: z
     .string()
-    .min(8, { message: 'Password must be at least 8 characters' })
+    .min(8, { message: 'Password must be at least 8 characters' }),
 });
 
 function AdminLoginPage() {
@@ -44,8 +44,8 @@ function AdminLoginPage() {
 
   async function login(data) {
     try {
-      console.log("welcome");
-      
+      console.log('welcome');
+
       const response = await axios.post(
         'http://localhost:2300/api/v1/login',
         data,
@@ -156,7 +156,15 @@ function AdminLoginPage() {
               )}
             </div>
           </div>
-          
+          <div>
+            <Link
+              style={{ textDecoration: 'none', color: '#000' }}
+              to="/forgot-password"
+            >
+              <p>Forgot Password?</p>
+            </Link>
+          </div>
+
           {loginError && (
             <span className="error password-error">{loginError}</span>
           )}
