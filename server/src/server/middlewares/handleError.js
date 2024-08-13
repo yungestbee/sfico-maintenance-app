@@ -6,8 +6,10 @@ module.exports.dbSchemaErrors = (err) => {
        
       });
     } else {
+      console.log({yungest: err});
       const key = Object.keys(err.keyPattern);
       if (key[0] === "phone") {
+        
         return "Phone Number already exist";
       } else if (key[0] === "email") {
         return "Email address already exist";

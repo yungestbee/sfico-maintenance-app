@@ -29,8 +29,10 @@ class AuthController {
         email,
         phoneNumber,
         tempPassword: hashedPassword,
+        password: hashedPassword,
         username: username,
       });
+      console.log(user);
 
       await user.save();
       req.user = username;
@@ -62,58 +64,61 @@ class AuthController {
       if (!user) {
         return res.status(400).json({ msg: 'Invalid Credentials' });
       }
-      const isTempMatch = await bcrypt.compare(password, user.tempPassword);
-      if (isTempMatch) {
+      if (user.tempPassword === user.password) {
+        const isTempMatch = await bcrypt.compare(password, user.tempPassword);
+        if (isTempMatch) {
+          const payload = {
+            user: {
+              id: user.id,
+              name: user.username,
+            },
+          };
+          const token = jwt.sign(payload, process.env.JWT_SECRET, {
+            expiresIn: 3600000,
+          });
+
+          let resp = {
+            code: 419,
+            status: 'success',
+            message: 'Logged in! Now change your password!!!',
+            token,
+          };
+          res.cookie('userToken', token, { maxAge: 1000 * 60 * 60 });
+          return res.status(resp.code).json(resp);
+        } else {
+          return res.status(400).json({ msg: 'Invalid Credentials' });
+        }
+      } else {
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+          return res.status(400).json({ msg: 'Invalid Credentials' });
+        }
+        // initiate the resp object
+        let resp;
         const payload = {
           user: {
             id: user.id,
             name: user.username,
           },
         };
+
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: 3600000,
         });
-
-        let resp = {
-          code: 419,
-          status: 'success',
-          message: 'Logged in! Now change your password!!!',
-          token,
-        };
         res.cookie('userToken', token, { maxAge: 1000 * 60 * 60 });
+
+        const { password: userPassword, ...userDataWithoutPassword } =
+          user.toObject();
+
+        resp = {
+          code: 200,
+          status: 'success',
+          message: 'Login Successful',
+          data: { user: userDataWithoutPassword, token },
+        };
+
         return res.status(resp.code).json(resp);
-      }else{
-        return res.status(400).json({msg: "Invalid Credentials"})
       }
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(400).json({ msg: 'Invalid Credentials' });
-      }
-      // initiate the resp object
-      let resp;
-      const payload = {
-        user: {
-          id: user.id,
-          name: user.username,
-        },
-      };
-
-      const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: 3600000,
-      });
-      res.cookie('userToken', token, { maxAge: 1000 * 60 * 60 });
-
-      const { password: userPassword, ...userDataWithoutPassword } =
-        user.toObject();
-
-      resp = {
-        code: 200,
-        status: 'success',
-        message: 'Login Successful',
-        data: { user: userDataWithoutPassword, token },
-      };
-
-      return res.status(resp.code).json(resp);
     } catch (err) {
       // console.error(err.message);
       return res.status(500).send('Error logging in!');
@@ -123,6 +128,8 @@ class AuthController {
   static async changePassword(req, res) {
     const userId = req.user.id;
     console.log(userId);
+    console.log(req.body);
+
     const { newPassword, confirmNewPassword } = req.body;
     if (newPassword == confirmNewPassword) {
       try {

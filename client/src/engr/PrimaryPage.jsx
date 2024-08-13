@@ -2,25 +2,27 @@ import { Link, useNavigate } from 'react-router-dom';
 // import './primaryPage.css';
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-// import AdminLoginPage from './adminLogin';
+import AdminLoginPage from '../admin/adminLogin';
 import { FaFolderOpen, FaBuilding } from 'react-icons/fa6';
 import AdminHeader from '../admin/adminHeader';
-// import jwtDecode from 'jwt-decode'; // Ensure this import is correct
+import {jwtDecode} from 'jwt-decode'; // Ensure this import is correct
 
 function PrimaryPage() {
-  const token = Cookies.get('foodieToken');
+  const token = Cookies.get('userToken');
   const [decode, setDecode] = useState('');
+    
 
   useEffect(() => {
     if (token) {
       const decoded = jwtDecode(token);
-      setDecode(decoded.user.username);
+      const user = decoded.user.name.split(".")
+      setDecode(user);
     }
   }, [token]);
 
   return (
     <>
-      {/* {decode === 'admin' ? ( */}
+      {decode ? (
       <div className="container13">
         <AdminHeader />
         <div className="container1">
@@ -46,10 +48,8 @@ function PrimaryPage() {
         </div>
         {/* <img className="hero-img margin-top-big" src={logo} alt="logo" /> */}
       </div>
-      {/* ) : (
-        <h1>Sfico Limited</h1>
-        // <AdminLoginPage />
-      )} */}
+      ) : (
+      <AdminLoginPage />)}
     </>
   );
 }

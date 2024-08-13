@@ -15,24 +15,25 @@ function AdminHeader() {
       credentials: "include",
       method: "POST",
     }).then(() => {
-      navigate("/admin/login");
+      navigate("/login");
     });
     setAdminInfo(null);
   }
+  console.log(adminInfo);
+  
   if (adminInfo) {
-    if (adminInfo.role == "restaurant") {
       const username =
-        adminInfo && adminInfo.name ? adminInfo.name.split(" ") : null;
-      var Dname = username ? username[0] : null;
-    } else {
-      const username =
-        adminInfo && adminInfo.username ? adminInfo.username.split(" ") : null;
+        adminInfo.split(".")
       var Dname = username ? username[0] : null;
     }
-  }
+  console.log(Dname);
+  
   return (
     <div className="Header1">
       <div className="nav-flex-container1">
+        <div className="nav-flex-container1-image">
+          <img src="/sfico-logo.png" alt="company logo"/>
+        </div>
         <div className="nav-btn-box">
           {Dname && (
             <>

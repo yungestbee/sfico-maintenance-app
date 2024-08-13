@@ -13,10 +13,10 @@ import AdminLoginPage from "./adminLogin";
 import Swal from "sweetalert2";
 
 const schema = z.object({
-  currentPassword: z
+  newPassword: z
     .string()
     .min(8, { message: "Password must be at least 8 characters." }),
-  newPassword: z
+ confirmNewPassword: z
     .string()
     .min(8, { message: "Password must be at least 8 characters" }),
 });
@@ -56,7 +56,7 @@ function FPPage() {
   async function changePassword(data) {
     try {
       const response = await axios.post(
-        "http://localhost:2300/api/v1/auth/changepassword",
+        "http://localhost:2300/api/v1/changepassword",
         data,
         { withCredentials: true }
       );
@@ -130,7 +130,7 @@ function FPPage() {
                   type={type}
                   id="password"
                   placeholder="Password"
-                  {...register("currentPassword")}
+                  {...register("newPassword")}
                 />
                 {icon && <div onClick={handleToggle}>{icon}</div>}
                 <div>
@@ -147,7 +147,7 @@ function FPPage() {
                   type={type}
                   placeholder="New Password"
                   id="logIn"
-                  {...register("newPassword")}
+                  {...register("confirmNewPassword")}
                 />
                 {icon && <div onClick={handleToggle}>{icon}</div>}
                 <div>

@@ -32,28 +32,7 @@ const signUp = (data) => {
       "any.required": `this field is require`,
       "string.empty": `"email" cannot be empty field`,
     }),
-    // Password: Joi.string()
-    //   .required()
-    //   .min(8)
-    //   .pattern(
-    //     new RegExp(/(?=.*[A-Z])[a-zA-Z0-9]+[\#\@\$\%\&\*\(\)\>\<\~\{\}]+/)
-    //   )
-    //   .messages({
-    //     "string.pattern.base": `Password must contain atleast one capital letter and one special characters`,
-    //     "any.required": `Password field is required`,
-    //     "string.min": `Password must be minimum 8 characters`,
-    //   }),
 
-    // confirmPassword: Joi.any().valid(Joi.ref("Password")).required().messages({
-    //   "any.require": "Confirm Password is required",
-    //   "any.only": "Passwords do not match",
-    // }),
-
-    // userType: Joi.string().required().trim().messages({
-    //   "string.base": `Select your type of user`,
-    //   "string.empty": `You must select type of user`,
-    //   "any.required": `user type is required`,
-    // }),
   });
   return Schemas.validate(data);
 };

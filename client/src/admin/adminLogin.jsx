@@ -45,7 +45,8 @@ function AdminLoginPage() {
   async function login(data) {
     try {
       console.log('welcome');
-
+      
+      
       const response = await axios.post(
         'http://localhost:2300/api/v1/login',
         data,
@@ -53,33 +54,25 @@ function AdminLoginPage() {
       );
       if (response.status == 200) {
         // Registration successful, show success message or redirect to another page
-        if (response.data.data.user.name == 'admin') {
-          loginUser(response.data.data.user);
-          //alert the user
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Login successful!',
-            showConfirmButton: false,
-            timer: 2500,
-          });
-
+        loginUser(response.data.data.user.username);
+        //alert the user
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Login successful!',
+          showConfirmButton: false,
+          timer: 2500,
+        });
+        if (response.data.data.user.username == 'admin') {
           navigate('/admin');
           window.location.reload();
-          // Reset the form and clear input fields
           setLoginError('');
         } else {
-          loginUser(response.data.data.user);
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Login successful!',
-            showConfirmButton: false,
-            timer: 2500,
-          });
           navigate('/');
           window.location.reload();
+          setLoginError('');
         }
+        // Reset the form and clear input fields
       } else if (response.status == 419) {
         Swal.fire({
           position: 'center',
