@@ -1,4 +1,3 @@
-
 .section-admin-hero {
   background-image: linear-gradient(to right bottom, #120a028e, #2311038d),
     url(./admin-hero-img.jpeg);
@@ -127,4 +126,253 @@
 }
 .footer-logo-box {
   width: 12rem;
+}
+
+.admin-hero-section {
+  background-image: linear-gradient(to right bottom, #120a0253, #23110364),
+    url(./admin-hero-img.jpg);
+  height: 100vh;
+  background-size: 100%;
+  position: relative;
+  margin-bottom: 8rem;
+}
+
+em {
+  font-size: 1.2rem;
+}
+.form-section,
+.section-orders {
+  /* margin-bottom: 8rem; */
+  padding: 0rem 6rem 0rem 6rem;
+}
+.hotel-icon {
+  width: 4rem;
+  fill: #fd7e14;
+}
+.form-section-container {
+  display: flex;
+  /* align-items: top; */
+  gap: 5rem;
+}
+.management-icon {
+  font-size: 6rem;
+}
+.form-description {
+  width: 50%;
+  line-height: 3rem;
+}
+.heading-tertiary {
+  margin-bottom: 2rem;
+}
+.form-container {
+  width: 50%;
+  padding: 2rem;
+}
+fieldset {
+  border-color: #fd7e14;
+  border-radius: 0 2.5rem 2.5rem 0;
+  min-width: 40rem;
+}
+.legend {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-list {
+  list-style: none;
+  padding: 2rem;
+}
+.form-list-item,
+.order-list-item {
+  margin-bottom: 2.5rem;
+}
+.form-list-item input {
+  margin-left: 2rem;
+  width: 25rem;
+  height: 3rem;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.form-list-item input:focus {
+  outline: none;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid #fd7e14;
+}
+/*  */
+
+.submit-btn {
+  border: none;
+  border-radius: 0 2rem 2rem 0;
+  background-color: #fd7e14;
+  color: #fff2e8;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1.6rem;
+}
+.submit-icon {
+  width: 3rem;
+  fill: #fff2e8;
+}
+.section-dishes {
+  /* margin-bottom: 8rem; */
+  padding: 6rem 6rem 0rem 6rem;
+  background-color: #f7f7f7;
+}
+
+.modal-container {
+  /* max-width: 60vw; */
+  /* border:1px solid; */
+  margin-top: 5rem;
+}
+.modal {
+  max-width: 40vw;
+  border: 1px solid;
+  border-radius: 15px;
+  margin: 5rem auto;
+  padding: 2rem 4rem;
+  height: 50vh;
+  position: relative;
+  background-color: #fff2e8;
+}
+
+.modal2 {
+  max-width: 40vw;
+  border: 1px solid;
+  border-radius: 15px;
+  margin: 5rem auto;
+  padding: 2rem 4rem;
+  height: 33vh;
+  position: relative;
+  background-color: #fff2e8;
+}
+
+.modal h3 {
+  margin: 2rem 0;
+}
+
+.modal2 h3 {
+  margin: 2rem 0;
+}
+
+.modal-form {
+  position: relative;
+}
+.modal-icon {
+  font-size: 2rem;
+  position: absolute;
+  right: 14px;
+  cursor: pointer;
+}
+
+.modal-button {
+  width: 7rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.modal-input {
+  width: 95%;
+  margin: auto;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-chamber {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  position: absolute;
+  right: 2px;
+  /* border:1px solid; */
+}
+
+.btn-chamber2 {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  position: absolute;
+  right: 35px;
+  /* border:1px solid; */
+}
+
+.cnfm {
+  border: none;
+  background-color: #fd7e14;
+  color: #fff;
+}
+
+.cnfm2 {
+  border: none;
+  background-color: #deb887;
+  color: #fff;
+}
+/* *********************
+MEDIA QUARY
+************************/
+
+@media all and (max-width: 530px) {
+  .admin-hero-section {
+    background-image: linear-gradient(to right bottom, #120a0253, #23110364),
+      url(./admin-hero-img.jpg);
+    height: 100vh;
+    /* background-size: 100%; */
+    /* background-size: auto; */
+    object-fit: contain;
+    width: 100vw;
+    position: relative;
+    margin-bottom: 8rem;
+  }
+  .hero-img {
+    width: 20rem;
+    height: 20rem;
+    /* background: radial-gradient(closest-side, #4c2506, #fff2e8, #fd7e14); */
+    /* padding: 5rem; */
+    /* border-radius: 50%; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+  }
+  .hero-img-admin {
+    display: none;
+  }
+  .form-section-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6rem;
+    display: block;
+    gap: 5rem;
+  }
+  .form-description {
+    width: auto;
+    margin-bottom: 3rem;
+  }
+  .form-container {
+    width: auto;
+  }
+  .form-list-item label {
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .form-list-item input {
+    margin-left: 0;
+  }
+
+  /* LOGIN AND SIGNUP QUARY */
+  .login-flex-box {
+    height: auto;
+    width: 80%;
+  }
+  .login-img-box {
+    height: auto;
+  }
+  .log2 {
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    color: rgb(111, 42, 12);
+    text-align: center;
+    /* display: none; */
+  }
 }

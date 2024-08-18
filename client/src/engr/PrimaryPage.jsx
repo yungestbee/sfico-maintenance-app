@@ -38,7 +38,7 @@ function PrimaryPage() {
 
           <Link
             style={{ textDecoration: 'none', color: '#fff' }}
-            to="/admin/reports"
+            to="/reports"
           >
             <div className="primaryCard">
               <FaFolderOpen className="adminIcon" />

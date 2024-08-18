@@ -61,9 +61,11 @@ class AuthController {
     try {
       const { username, password } = result.value;
       let user = await User.findOne({ username });
+
       if (!user) {
         return res.status(400).json({ msg: 'Invalid Credentials' });
       }
+
       if (user.tempPassword === user.password) {
         const isTempMatch = await bcrypt.compare(password, user.tempPassword);
         if (isTempMatch) {
@@ -116,7 +118,7 @@ class AuthController {
           message: 'Login Successful',
           data: { user: userDataWithoutPassword, token },
         };
-
+        req.user = user.username
         return res.status(resp.code).json(resp);
       }
     } catch (err) {

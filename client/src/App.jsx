@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<PrimaryPage2 />} />
           <Route path="/change-password" element={<FPPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/engineer-report" element={<EngrPage />} />
+          <Route path="/reports" element={<EngrPage />} />
         </Routes>
       </Router>
     </AdminContextProvider>

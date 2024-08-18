@@ -1,27 +1,28 @@
-const User = require("../../models/user");
-const jwt = require("jsonwebtoken");
+const User = require('../../models/user');
+const jwt = require('jsonwebtoken');
 
 class AuthMiddleware {
   static async authenticateUser(req, res, next) {
     try {
       // const token = req.header("Authorization");
       const token = req.cookies.userToken;
-
       if (!token) {
-        return res.status(401).json({ msg: "No Token, authorization denied, Login again" });
+        return res
+          .status(401)
+          .json({ msg: 'No Token, authorization denied, Login again' });
       }
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      
-        let user = await User.findById(decoded.user.id);
-      
+      let user = await User.findById(decoded.user.id);
+
       if (!user) {
-        return res.status(401).json({ msg: "Token is not valid" });
+        return res.status(401).json({ msg: 'Token is not valid' });
       }
       req.user = user;
+
       next();
     } catch (err) {
-      return res.status(401).json({ msg: "Token is not valid" });
+      return res.status(401).json({ msg: 'Token is not valid' });
     }
   }
 }

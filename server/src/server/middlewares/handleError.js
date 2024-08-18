@@ -6,7 +6,6 @@ module.exports.dbSchemaErrors = (err) => {
        
       });
     } else {
-      console.log({yungest: err});
       const key = Object.keys(err.keyPattern);
       if (key[0] === "phone") {
         
