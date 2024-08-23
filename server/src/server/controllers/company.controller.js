@@ -59,7 +59,7 @@ class CompanyController {
 
   static async getCompaniesOnMaintenance(req, res) {
     try {
-      let companiesOnMaintenance = await Company.find({maintenance});
+      let companiesOnMaintenance = await Company.find({ maintenance });
       if (!companiesOnMaintenance) {
         return res.status(400).json({ message: 'Unable to load companies' });
       }

@@ -19,14 +19,12 @@ function AdminHeader() {
     });
     setAdminInfo(null);
   }
-  console.log(adminInfo);
   
   if (adminInfo) {
       const username =
         adminInfo.split(".")
       var Dname = username ? username[0] : null;
     }
-  console.log(Dname);
   
   return (
     <div className="Header1">

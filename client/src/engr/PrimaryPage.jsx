@@ -28,7 +28,7 @@ function PrimaryPage() {
         <div className="container1">
           <Link
             style={{ textDecoration: 'none', color: '#fff' }}
-            to="/admin/companies"
+            to="/maintenance-log"
           >
             <div className="primaryCard">
               <FaBuilding className="adminIcon" />

@@ -1,25 +1,26 @@
 const Reports = require('../../models/reports');
+const findOrCreateCompany = require('../middlewares/CompanyControl');
 const errorHandler = require('../middlewares/handleError');
 require('dotenv').config();
 
 class ReportController {
   static async create(req, res) {
     try {
-      let { file, company, machine, engineer } = req.body;
+      let { file, name, location, machine } = req.body;
+      const companyy = await findOrCreateCompany(name, location);
       console.log(req.body);
       // let engineer = req.user.username
 
       let report = new Reports({
         file,
-        company,
+        company: companyy._id,
         machine,
-        engineer,
+        engineer: req.user._id,
       });
 
       await report.save();
 
-      return res.status(201).json({
-        status: 200,
+      return res.status(200).json({
         message: 'Report created successfully',
       });
     } catch (error) {
@@ -31,7 +32,10 @@ class ReportController {
 
   static async getReports(req, res) {
     try {
-      let reports = await Reports.find({});
+      const reports = await Reports.find()
+        .populate('engineer')
+        .populate('company')
+        .sort({ createdAt: -1 });
       if (!reports) {
         return res.status(400).json({ message: 'Unable to load reports' });
       }
@@ -46,26 +50,28 @@ class ReportController {
     }
   }
 
-  // static async getReportss(req, res) {
-  //   try {
-  //     let reports = await Reports.find().populate('user');
-  //     if (!reports) {
-  //       return res.status(400).json({ message: 'Unable to load reports' });
-  //     }
-  //     return res.status(200).json({
-  //       status: 200,
-  //       message: reports,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     const errors = errorHandler.dbSchemaErrors(error);
-  //     return res.status(403).json({ Message: errors });
-  //   }
-  // }
+  static async getReportss(req, res) {
+    try {
+      let reports = await Reports.find()
+        .sort({ createdAt: -1 })
+        .populate('company');
+      if (!reports) {
+        return res.status(400).json({ message: 'Unable to load reports' });
+      }
+      return res.status(200).json({
+        status: 200,
+        message: reports,
+      });
+    } catch (error) {
+      console.log(error);
+      const errors = errorHandler.dbSchemaErrors(error);
+      return res.status(403).json({ Message: errors });
+    }
+  }
 
   static async getReport(req, res) {
     try {
-      let reports = await Reports.find(req.body);
+      let reports = await Reports.find(req.body).populate('company');
       if (!reports) {
         return res.status(400).json({ message: 'Unable to load reports' });
       }

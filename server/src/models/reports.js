@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 const { Schema, model } = require('mongoose');
 
+
+
 const reportSchema = new Schema(
   {
-    file: {
-      type: String,
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Company',
       required: true,
     },
-    company: {
+    file: {
       type: String,
       required: true,
     },
@@ -20,6 +23,7 @@ const reportSchema = new Schema(
       type: Array,
       required: true,
     },
+    reportDate: { type: Date, default: Date.now },
   },
   {
     timestamps: true,

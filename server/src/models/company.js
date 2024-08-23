@@ -4,7 +4,7 @@ const companySchema = new Schema(
   {
     email: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
     },
     name: {
@@ -14,16 +14,19 @@ const companySchema = new Schema(
     },
     phone: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
+    },
+    location: {
+      type: String,
     },
     address: {
       type: String,
-      required: true,
+      // required: true,
     },
     machine: {
       type: Array,
-      required: true,
+      // required: true,
     },
     maintenance: {
       type: Object,
@@ -38,6 +41,6 @@ const companySchema = new Schema(
   }
 );
 
-const Company = model('company', companySchema);
+const Company = model('Company', companySchema);
 
 module.exports = Company;

@@ -19,7 +19,6 @@ class AuthMiddleware {
         return res.status(401).json({ msg: 'Token is not valid' });
       }
       req.user = user;
-
       next();
     } catch (err) {
       return res.status(401).json({ msg: 'Token is not valid' });

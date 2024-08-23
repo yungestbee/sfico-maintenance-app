@@ -44,15 +44,14 @@ function AdminLoginPage() {
 
   async function login(data) {
     try {
-      console.log('welcome');
-      
-      
       const response = await axios.post(
         'http://localhost:2300/api/v1/login',
         data,
         { withCredentials: true }
       );
       if (response.status == 200) {
+        console.log(response.data.data.user);
+        
         // Registration successful, show success message or redirect to another page
         loginUser(response.data.data.user.username);
         //alert the user
@@ -65,11 +64,11 @@ function AdminLoginPage() {
         });
         if (response.data.data.user.username == 'admin') {
           navigate('/admin');
-          window.location.reload();
+          // window.location.reload();
           setLoginError('');
         } else {
           navigate('/');
-          window.location.reload();
+          // window.location.reload();
           setLoginError('');
         }
         // Reset the form and clear input fields
