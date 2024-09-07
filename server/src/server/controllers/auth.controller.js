@@ -10,7 +10,7 @@ class AuthController {
   static async register(req, res, next) {
     const value = signUp(req.body);
     console.log(value);
-    const { email, firstName, lastName, phoneNumber } = value.value;
+    const { email, firstName, lastName, phoneNumber, address } = value.value;
     try {
       const password = generator.generate({
         length: 10,
@@ -27,6 +27,7 @@ class AuthController {
         firstName,
         lastName,
         email,
+        address,
         phoneNumber,
         tempPassword: hashedPassword,
         password: hashedPassword,

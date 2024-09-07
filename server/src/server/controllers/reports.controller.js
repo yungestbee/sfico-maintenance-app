@@ -85,6 +85,23 @@ class ReportController {
       return res.status(403).json({ Message: errors });
     }
   }
+
+  static async deleteReport(req, res) {
+    try {
+      let reports = await Reports.findById(req.params.id);
+      if (!reports) {
+        return res.status(400).json({ message: 'report unavailable' });
+      }
+      await Reports.findByIdAndDelete(req.params.id);
+      return res.status(200).json({
+        message: "Report Successfully Deleted"
+      });
+    } catch (error) {
+      console.log(error);
+      const errors = errorHandler.dbSchemaErrors(error);
+      return res.status(403).json({ Message: errors });
+    }
+  }
 }
 
 module.exports = ReportController;

@@ -12,17 +12,13 @@ const companySchema = new Schema(
       required: true,
       unique: true,
     },
-    phone: {
+    phoneNumber: {
       type: String,
       // required: true,
       unique: true,
     },
     location: {
       type: String,
-    },
-    address: {
-      type: String,
-      // required: true,
     },
     machine: {
       type: Array,

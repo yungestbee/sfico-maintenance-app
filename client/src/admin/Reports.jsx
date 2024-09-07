@@ -109,7 +109,6 @@ const ReportPage = () => {
         if (response.status == 200) {
           // Registration successful, show success message or redirect to another page
           // reset();
-          console.log(response);
 
           Swal.fire({
             position: 'center',
@@ -148,6 +147,54 @@ const ReportPage = () => {
       }
     }
   };
+
+  const handleDelete = async (Id) => {
+
+    try {
+      // Simulated API endpoint for deleting data from the database
+      const response = await fetch(
+        `http://localhost:2300/api/v1/reports/${Id}`,
+        {
+          method: 'DELETE',
+          credentials: 'include',
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        // Refetch the updated list of foods
+        setSelectedId('');
+        closeModal2();
+        fetchAdmin();
+      } else {
+        console.error('Failed to delete data from the database');
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Something went wrong, Please try again later',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: error.response.data.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
   return (
     <>
       {decode != '' && decode == 'admin' ? (
@@ -214,8 +261,8 @@ const ReportPage = () => {
                               className="modal-icon"
                               onClick={() => setModalOpen2(false)}
                             />
-                            <h3>Delete Product</h3>
-                            <p>Are you sure you want to delete this report  ?</p>
+                            <h3>Delete Report</h3>
+                            <p>Are you sure you want to delete this report ?</p>
 
                             <div className="btn-chamber2">
                               <button

@@ -11,6 +11,8 @@ import EngrPage from './engr/EngrPage.jsx';
 import { AdminContextProvider } from './admin/adminContext.jsx';
 import ReportPage from './admin/Reports.jsx';
 import MaintenancePage from './engr/MaintenanceLog.jsx';
+import AdminEngrPage from './admin/adminEngineerPage.jsx';
+import CompanyPage from './admin/adminCompanyPage.jsx';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/reports" element={<EngrPage />} />
           <Route path="/admin/reports" element={<ReportPage />} />
           <Route path="/maintenance-log" element={<MaintenancePage />} />
+          <Route path="/admin/engineers" element={<AdminEngrPage />} />
+          <Route path="/admin/companies" element={<CompanyPage />} />
         </Routes>
       </Router>
     </AdminContextProvider>
