@@ -182,11 +182,11 @@ fieldset {
   list-style: none;
   padding: 2rem;
 }
-.form-list-item,
+.heading-primary,
 .order-list-item {
   margin-bottom: 2.5rem;
 }
-.form-list-item input {
+.heading-primary input {
   margin-left: 2rem;
   width: 25rem;
   height: 3rem;
@@ -196,16 +196,18 @@ fieldset {
   border-radius: 2px;
   background-color: rgba(255, 255, 255, 0.5);
 }
-.form-list-item input:focus {
+.heading-primary input:focus {
   outline: none;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
   border-bottom: 3px solid #fd7e14;
 }
 
-.input-role input{
-width: 2rem;
+.input-role input {
+  margin-left: 2rem;
+  width: 2rem;
   height: 2rem;
-  border:1px solid;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 /*  */
 
@@ -314,8 +316,6 @@ width: 2rem;
   background-color: #deb887;
   color: #fff;
 }
-
-
 
 .delivery-container {
   background-color: #fff2e8;
@@ -525,11 +525,11 @@ MEDIA QUARY
   .form-container {
     width: auto;
   }
-  .form-list-item label {
+  .heading-primary label {
     display: inline-block;
     margin-bottom: 1rem;
   }
-  .form-list-item input {
+  .heading-primary input {
     margin-left: 0;
   }
 

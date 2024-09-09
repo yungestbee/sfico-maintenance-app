@@ -25,6 +25,11 @@ const schema = z.object({
 
 const AdminEngrPage = () => {
   const [admin, setAdmin] = useState([]);
+  const [display, setDisplay] = useState('');
+  const [inputDisplay, setInputDisplay] = useState('show');
+  const [add, setAdd] = useState('');
+  const [machine, setMachine] = useState('');
+  const [machineArray, setMachineArray] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalOpen2, setModalOpen2] = useState(false);
   const [selectedId, setSelectedId] = useState('');
@@ -91,6 +96,34 @@ const AdminEngrPage = () => {
     setModalOpen2(false);
   };
 
+  const handleOptionDisplay = () => {
+    setDisplay('show');
+    console.log(display);
+  };
+  const handleOptionDisplayFalse = () => {
+    setDisplay('');
+    console.log(display);
+  };
+
+  const handleChangeInDisplay = () => {
+    setAdd('');
+    setInputDisplay("show")
+
+  };
+  const handleAddMachine = () => {
+    const newMachine = [...machineArray, machine];
+    setMachineArray(newMachine);
+    setMachine('');
+    setInputDisplay('');
+  };
+  useEffect(() => {
+    if (machineArray.length > 0) {
+      console.log(machineArray, machine);
+      setAdd('show');
+    }
+  }, [machineArray]);
+
+  console.log(machineArray);
   const errorTimer = (e) => {
     setcError(e);
     setTimeout(() => {
@@ -264,27 +297,34 @@ const AdminEngrPage = () => {
                 <fieldset>
                   <legend className="legend">Company Manager</legend>
                   <form onSubmit={handleSubmit(handleAddEngineer)}>
-                    <ul className="form-list">
-                      <li className="form-list-item">
+                    <ul className="form-list2">
+                      <li className="form-list-item2">
                         <label>Company Name:</label>
                         <input type="text" {...register('firstName')} />
                       </li>
-                      <li className="form-list-item">
+                      <li className="form-list-item2">
                         <label>Company Location:</label>
                         <input type="text" {...register('lastName')} />
                       </li>
-                      <li className="form-list-item">
+                      <li className="form-list-item2">
                         <label> Company Email:</label>
                         <input type="email" {...register('email')} />
                       </li>
-                      <li className="form-list-item">
-                        <label> Maintenance:</label>
+                      <li className="form-list-item2">
+                        <label>Phone Number:</label>
+                        <input type="number" {...register('phoneNumber')} />
+                      </li>
+                      <li className="form-list-item3">
+                        <label> Maintenance?</label>
                         <div className="input-role">
                           <input
                             name="main"
                             type="radio"
                             id="valid"
                             value="yes"
+                            onClick={() => {
+                              handleOptionDisplay();
+                            }}
                           />
                           <label htmlFor="valid">Yes</label>
 
@@ -293,14 +333,65 @@ const AdminEngrPage = () => {
                             type="radio"
                             id="invalid"
                             value="no"
+                            onClick={() => {
+                              handleOptionDisplayFalse();
+                            }}
                           />
                           <label htmlFor="invalid">No</label>
                         </div>
                       </li>
-                      <li className="form-list-item">
-                        <label>Phone Number:</label>
-                        <input type="number" {...register('phoneNumber')} />
-                      </li>
+                      <div className={display ? 'showDisplay' : 'dontDisplay'}>
+                        <li className="form-list-item4">
+                          <label>Machine(s):</label>
+                          <div>
+                            {machineArray.map((e) => (
+                              <p>{e}</p>
+                            ))}
+                          </div>
+                          <div
+                            className={
+                              inputDisplay ? 'showDisplay' : 'dontDisplay '
+                            }
+                          >
+                            <input
+                              type="text"
+                              onChange={(e) => setMachine(e.target.value)}
+                            />
+                            <span
+                              className="addMachineContainer"
+                              onClick={() => {
+                                handleAddMachine();
+                              }}
+                            >
+                              Add
+                            </span>
+                          </div>
+
+                          <p
+                            className={
+                              add
+                                ? 'form-list-item4-small-text'
+                                : 'form-list-item4-small-text-hide'
+                            }
+                            onClick={() => handleChangeInDisplay()}
+                          >
+                            Add Another?
+                          </p>
+                        </li>
+                        <li className="form-list-item4">
+                          <label>Duration:</label>
+                          <div className="calendar">
+                            <div>
+                              <p>From</p>
+                              <input type="date" {...register('machine')} />
+                            </div>
+                            <div>
+                              <p>To</p>
+                              <input type="date" {...register('machine')} />
+                            </div>
+                          </div>
+                        </li>
+                      </div>
                     </ul>
                     {cError && <p className="delivery-error">{cError}</p>}
                     <button
